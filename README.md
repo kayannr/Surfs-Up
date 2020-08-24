@@ -73,3 +73,43 @@ Python and SQLAlchemy are used to do basic climate analysis and data exploration
 
   ![daily-normals](Images/Daily_Normals.png)
 
+## Climate App
+* Flask is used to create routes.
+
+### Routes
+
+* `/`
+
+  * Home page.
+
+  * All routes that are available are listed.
+
+* `/api/v1.0/precipitation`
+
+  * The query results are converted to a dictionary using `date` as the key and `prcp` as the value.
+
+  * The JSON representation of the dictionary is returned.
+
+* `/api/v1.0/stations`
+
+  * A JSON list of stations from the dataset is returned.
+
+* `/api/v1.0/tobs`
+  * Query the dates and temperature observations of the most active station for the last year of data.
+  
+  * A JSON list of temperature observations (TOBS) for the previous year is returned.
+
+* `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`
+
+  * Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
+
+  * When given the start only, calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
+
+  * When given the start and the end date, calculate the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
+
+### Other Considerations
+
+* The station and measurement tables are joined for some of the queries.
+
+* Flask `jsonify` is used to convert your API data into a valid JSON response object.
+
